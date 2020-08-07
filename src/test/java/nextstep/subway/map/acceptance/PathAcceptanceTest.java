@@ -85,6 +85,7 @@ public class PathAcceptanceTest extends AcceptanceTest {
 
         assertThat(pathResponse.getDistance()).isEqualTo(4);
         assertThat(stationsIds).containsExactlyElementsOf(Lists.newArrayList(1L, 2L, 3L));
+        assertThat(pathResponse.getStationResponses()).extracting(StationResponse::getId).containsExactly(1L, 2L, 3L);
     }
 
     @DisplayName("최단 시간 검색")
@@ -99,6 +100,7 @@ public class PathAcceptanceTest extends AcceptanceTest {
 
         assertThat(pathResponse.getDuration()).isEqualTo(4);
         assertThat(stationsIds).containsExactlyElementsOf(Lists.newArrayList(1L, 4L, 3L));
+        assertThat(pathResponse.getStationResponses()).extracting(StationResponse::getId).containsExactly(1L, 4L, 3L);
     }
 
     private List<Long> extractStationsIds(PathResponse pathResponse) {

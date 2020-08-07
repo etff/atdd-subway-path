@@ -54,11 +54,9 @@ public class PathService {
     }
 
     private StationResponse getStationResponse(Long stationId) {
-        Optional<Station> findStation = stationRepository.findById(stationId);
-        if (findStation.isPresent()) {
-            return StationResponse.of(findStation.get());
-        }
-        return new StationResponse();
+        return stationRepository.findById(stationId)
+                .map(StationResponse::of)
+                .orElseGet(StationResponse::new);
     }
 
     private void checkStations(Long source, Long target) {
